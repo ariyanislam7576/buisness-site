@@ -9,7 +9,6 @@ import Shipping from '../Shipping/Shipping';
 const Home = () => {
     return (
         <div>
-        <NavBar></NavBar>
         <Banner></Banner>
         <Products></Products>
         <Shipping></Shipping>

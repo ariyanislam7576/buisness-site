@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Col } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 const Product = ({product}) => {
     const {name , img , des ,price} = product
@@ -14,7 +15,9 @@ const Product = ({product}) => {
                         <Card.Text>
                            {des}
                         </Card.Text>
+                        <NavLink to='/placeorder'>
                         <button className='btn-info rounded px-2 fw-800'>Bay now</button>
+                        </NavLink>
                     </Card.Body>
                 </Card>
             </Col>
