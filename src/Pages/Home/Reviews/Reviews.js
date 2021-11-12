@@ -1,37 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Review from './Review/Review';
 
-const reviews = [
-    {
-        id: 1,
-        name: "Sofiul alom",
-        add: "Bangladesh",
-        des: "We all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedback"
-    },
-    {
-        id: 2,
-        name: "Jhon dalton",
-        add: "USA",
-        des: "We all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedback"
-    },
-    {
-        id: 3,
-        name: "Fakusi huku",
-        add: "France",
-        des: "We all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedbackWe all need people who will give us feedback"
-    },
-]
+
 
 const Reviews = () => {
+    const [reviews, setReviews] = useState([])
+    useEffect(()=>{
+        fetch('http://localhost:4500/addreview')
+        .then(res => res.json())
+        .then(data => {
+           setReviews(data)
+        })
+    },[])
     return (
         <Container className='my-3'>
             <h3>Customar Reviews</h3>
             <Row xs={1} md={3} className="g-4">
                     {
-                        reviews.map(review => <Review
-                        key={review.id}
-                        review={review}
+                        reviews.map(r => <Review
+                        key={r._id}
+                        r={r}
                         ></Review>)
                     }
             </Row>

@@ -3,7 +3,7 @@ import { Card, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 const Product = ({product}) => {
-    const {name , img , des ,price} = product
+    const { _id, name , img , description ,price} = product
     return (
         <div>
             <Col>
@@ -13,9 +13,9 @@ const Product = ({product}) => {
                         <Card.Title>{name}</Card.Title>
                         <strong><p> ${price}</p></strong>
                         <Card.Text>
-                           {des}
+                           {description}
                         </Card.Text>
-                        <NavLink to='/placeorder'>
+                        <NavLink to={`/placeorder/${_id}`}>
                         <button className='btn-info rounded px-2 fw-800'>Bay now</button>
                         </NavLink>
                     </Card.Body>
