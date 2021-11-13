@@ -1,4 +1,3 @@
-import { Alert } from '@mui/material';
 import React, { useState } from 'react';
 
 const MakeAdmin = () => {
@@ -23,7 +22,8 @@ const MakeAdmin = () => {
                 if (data.modifiedCount) {
                     console.log(data);
                     setSuccess(true);
-                    alert('admin added')
+                    alert('Admin added')
+                    
                 }
             })
 

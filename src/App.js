@@ -6,6 +6,7 @@ import AddReview from './Pages/Home/Drawer/AddReview/AddReview';
 import ResponsiveDrawer from './Pages/Home/Drawer/Drawer/Drawer';
 import MyOrder from './Pages/Home/Drawer/MyOrder/MyOrder';
 import Pay from './Pages/Home/Drawer/Pay/Pay';
+import Footer from './Pages/Home/Footer/Footer';
 import Home from './Pages/Home/Home/Home';
 import Register from './Pages/Home/Home/Register/Register';
 import Login from './Pages/Home/Login/Login';
@@ -24,7 +25,7 @@ function App() {
     <div className="App">
       <AuthProvider>
         <BrowserRouter>
-        <NavBar></NavBar>
+          <NavBar></NavBar>
           <Switch>
             <Route exact path='/'>
               <Home></Home>
@@ -75,6 +76,7 @@ function App() {
               <NotFound></NotFound>
             </Route>
           </Switch>
+          <Footer></Footer>
         </BrowserRouter>
       </AuthProvider>
     </div>

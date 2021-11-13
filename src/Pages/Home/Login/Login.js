@@ -24,6 +24,10 @@ const Login = () => {
         e.preventDefault()
     }
 
+    const handleGoogleSignIn = () => {
+        googleSignIn(location, history)
+    }
+
     return (
         <Container className='my-5'>
             <h4>Login</h4>
@@ -45,6 +49,7 @@ const Login = () => {
                 <Button type="submit" className='btn-info'>Submit</Button>
                 <p>New to here?? <Link to='/register'>Register</Link></p>
             </Form>
+            <button onClick={handleGoogleSignIn}>Signin with Google</button>
             {loading && <Spinner animation="border" />}
 
         </Container>
