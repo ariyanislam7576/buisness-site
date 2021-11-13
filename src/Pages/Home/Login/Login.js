@@ -1,3 +1,4 @@
+import { Alert } from '@mui/material';
 import Button from '@restart/ui/esm/Button';
 import React, { useState } from 'react';
 import { Container, Form, Spinner } from 'react-bootstrap';
@@ -5,7 +6,7 @@ import { Link , useHistory, useLocation} from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 
 const Login = () => {
-    const { user, signIn, authError, loading, googleSignIn } = useAuth()
+    const {signIn, authError, loading, googleSignIn } = useAuth()
     const [loginData,setLoginData] = useState({})
 
     const location = useLocation()
@@ -51,6 +52,7 @@ const Login = () => {
             </Form>
             <button onClick={handleGoogleSignIn}>Signin with Google</button>
             {loading && <Spinner animation="border" />}
+        {authError &&  <Alert variant='danger'>{authError}</Alert>}
 
         </Container>
     );
