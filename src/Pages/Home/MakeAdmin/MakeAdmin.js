@@ -10,19 +10,20 @@ const MakeAdmin = () => {
         setEmail(e.target.value);
     }
     const handleAdminSubmit = e => {
-        const user = { email };
+        const users = { email };
         fetch('https://immense-crag-91398.herokuapp.com/user/admin', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(users)
         })
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount) {
                     console.log(data);
                     setSuccess(true);
+                    alert('admin added')
                 }
             })
 
@@ -39,8 +40,6 @@ const MakeAdmin = () => {
              onBlur={handleOnBlur}></input>
            <button type='submit'>Make Admin</button>
         </form>
-        {success && <Alert severity="success">This is a success alert — check it out!</Alert>
-}
     </div>
     );
 };

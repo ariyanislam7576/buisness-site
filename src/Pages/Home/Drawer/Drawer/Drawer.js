@@ -14,11 +14,9 @@ import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import {
-    BrowserRouter as Router,
+    BrowserRouter,
     Switch,
     Route,
-    Link,
-    useParams,
     useRouteMatch
 } from "react-router-dom";
 import ManageProduct from '../../ManageProduct/ManageProduct';
@@ -37,7 +35,7 @@ function ResponsiveDrawer(props) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     let { path, url } = useRouteMatch();
-
+    const {admin} = useAuth()
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -48,13 +46,18 @@ function ResponsiveDrawer(props) {
             <Divider />
             <List>
                 <ListItemText className='text-start my-3'>
+                    {!admin && <div>
                     <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/pay`}>PAY</NavLink> <br />
-                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/addreview`}>Review</NavLink> <br />
+                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/addreview`}>Review</NavLink>
+                    </div>}
+                     <br />
                     <Divider />
-                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/addproduct`}>Add poduct</NavLink> <br />
+                    {admin && <div>
+                        <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/addproduct`}>Add poduct</NavLink> <br />
                     <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/manageorder`}>Manage order</NavLink> <br />
                     <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/manageproduct`}>Manage product</NavLink> <br />
-                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/makeadmin`}>Make admin</NavLink> <br />
+                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/makeadmin`}>Make admin</NavLink>
+                    </div> }<br />
                     <Divider />
                     <button onClick={logOut} className='btn-info m-3 rounded'>logout</button>
                 </ListItemText>
