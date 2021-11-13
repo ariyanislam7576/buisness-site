@@ -12,6 +12,8 @@ import Login from './Pages/Home/Login/Login';
 import MakeAdmin from './Pages/Home/MakeAdmin/MakeAdmin';
 import ManageOrder from './Pages/Home/ManageOrder/ManageOrder';
 import ManageProduct from './Pages/Home/ManageProduct/ManageProduct';
+import MoreProduct from './Pages/Home/MoreProduct/MoreProduct';
+import MoreReview from './Pages/Home/MoreReview/MoreReview';
 import NavBar from './Pages/Home/Navabar/NavBar';
 import NotFound from './Pages/Home/NotFound/NotFound';
 import PlaceOrder from './Pages/Home/PlaceOrder/PlaceOrder';
@@ -62,6 +64,12 @@ function App() {
             </Route>
             <Route path='/register'>
               <Register></Register>
+            </Route>
+            <Route path='/moreproduct'>
+              <MoreProduct></MoreProduct>
+            </Route>
+            <Route path='/morereview'>
+              <MoreReview></MoreReview>
             </Route>
             <Route path='*'>
               <NotFound></NotFound>

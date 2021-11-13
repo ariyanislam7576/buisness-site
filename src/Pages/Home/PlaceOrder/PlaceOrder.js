@@ -12,14 +12,14 @@ const PlaceOrder = () => {
     const [product, setProduct] = useState([])
     const { register, handleSubmit, reset, } = useForm();
     useEffect(() => {
-        fetch(`http://localhost:4500/addproduct/${id}`)
+        fetch(`https://immense-crag-91398.herokuapp.com/addproduct/${id}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data)
             })
     }, [])
     const onSubmit = data => {
-        axios.post('http://localhost:4500/myorder',data)
+        axios.post('https://immense-crag-91398.herokuapp.com/myorder',data)
          .then(res => {
         if(res.data){
             alert('Order placed')

@@ -8,47 +8,50 @@ const useFirebase = () => {
   const [user, setUser] = useState({})
   const [loading, setLoading] = useState(true)
   const [authError, setAuthError] = useState('')
+  const [admin , setAdmin] = useState(false)
 
 
   const Googleprovider = new GoogleAuthProvider
   const auth = getAuth()
 
-  const googleSignIn = () => {
+  const googleSignIn = (location, history) => {
     signInWithPopup(auth, Googleprovider)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
         const user = result.user;
-        // ...
+                saveUser(user.email, user.displayName, 'PUT');
+                setAuthError('');
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
       }).catch((error) => {
         setAuthError(error.message)
       });
 
   }
     //register opration
-    const registerUser = (email, password ,name, history) => {
-        setLoading(true)
-        createUserWithEmailAndPassword(auth, email, password)
+    const registerUser = (email, password, name, history) => {
+      setLoading(true);
+      createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
-            const newUser = {email , displayName: name}
-            setUser(newUser)
-            // updateProfile(auth.currentUser, {
-            //   displayName: name, 
-            // }).then(() => {
-              
-            // }).catch((error) => {
-              
-            // });
-            setAuthError('')
-            history?.replace('/')
+              setAuthError('');
+              const newUser = { email, displayName: name };
+              setUser(newUser);
+              // save user to the database
+              saveUser(email, name, 'POST');
+              // send name to firebase after creation
+              updateProfile(auth.currentUser, {
+                  displayName: name
+              }).then(() => {
+              }).catch((error) => {
+              });
+              history.replace('/home');
           })
           .catch((error) => {
-            setAuthError(error.message)
+              setAuthError(error.message);
+              console.log(error);
           })
-          .finally(() => setLoading(false))
-      }
+          .finally(() => setLoading(false));
+  }
 
         //sign in operation
     const signIn = (email, password, location, history) => {
@@ -63,7 +66,6 @@ const useFirebase = () => {
             // ...
           })
           .catch((error) => {
-            const errorCode = error.code;
             setAuthError(error.message)
     
           })
@@ -97,12 +99,32 @@ const useFirebase = () => {
           .finally(() => setLoading(false));
       }
 
+      useEffect(() => {
+        fetch(`https://immense-crag-91398.herokuapp.com/user/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user.email])
+
+
+      const saveUser = (email, displayName, method) => {
+        const user = { email, displayName };
+        fetch('https://immense-crag-91398.herokuapp.com/user', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then()
+    }
+
     return {
         user,
         googleSignIn,
         registerUser,
         signIn,
         logOut,
+        admin,
         loading,
         authError,
     }

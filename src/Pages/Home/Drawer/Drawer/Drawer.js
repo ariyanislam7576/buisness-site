@@ -13,14 +13,30 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams,
+    useRouteMatch
+} from "react-router-dom";
+import ManageProduct from '../../ManageProduct/ManageProduct';
+import MakeAdmin from '../../MakeAdmin/MakeAdmin';
+import MyOrder from '../MyOrder/MyOrder';
+import Pay from '../Pay/Pay';
+import AddReview from '../AddReview/AddReview';
+import AddProduct from '../../AddProduct/AddProduct';
+import ManageOrder from '../../ManageOrder/ManageOrder';
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
-    const {logOut} = useAuth()
+    const { logOut } = useAuth()
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    let { path, url } = useRouteMatch();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -32,16 +48,15 @@ function ResponsiveDrawer(props) {
             <Divider />
             <List>
                 <ListItemText className='text-start my-3'>
-                <NavLink className='m-3 text-dark text-decoration-none' to='/pay'>Pay</NavLink> <br />
-                <NavLink className='m-3 text-dark text-decoration-none' to='/myorder'>My order</NavLink> <br />
-                <NavLink className='m-3 text-dark text-decoration-none' to='/addreview'>Review</NavLink> <br />
-                <Divider/>
-                <NavLink className='m-3 text-dark text-decoration-none' to='/addproduct'>Add poduct</NavLink> <br />
-                <NavLink className='m-3 text-dark text-decoration-none' to='/manageorder'>Manage order</NavLink> <br />
-                <NavLink className='m-3 text-dark text-decoration-none' to='/manageproduct'>Manage product</NavLink> <br />
-                <NavLink className='m-3 text-dark text-decoration-none' to='/makeadmin'>Make admin</NavLink> <br />
-                <Divider/>
-                <button onClick={logOut} className='btn-info m-3 rounded'>logout</button>
+                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/pay`}>PAY</NavLink> <br />
+                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/addreview`}>Review</NavLink> <br />
+                    <Divider />
+                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/addproduct`}>Add poduct</NavLink> <br />
+                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/manageorder`}>Manage order</NavLink> <br />
+                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/manageproduct`}>Manage product</NavLink> <br />
+                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/makeadmin`}>Make admin</NavLink> <br />
+                    <Divider />
+                    <button onClick={logOut} className='btn-info m-3 rounded'>logout</button>
                 </ListItemText>
             </List>
         </div>
@@ -70,7 +85,7 @@ function ResponsiveDrawer(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        DASHBOARD
+                        DASHBOARD <NavLink className='m-3 text-white text-decoration-none' to='/home'>Home</NavLink>
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -111,6 +126,29 @@ function ResponsiveDrawer(props) {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
+                <Switch>
+                    <Route exact path={path}>
+                        <MyOrder></MyOrder>
+                    </Route>
+                    <Route path={`${path}/makeadmin`}>
+                       <MakeAdmin></MakeAdmin>
+                    </Route>
+                    <Route path={`${path}/pay`}>
+                       <Pay></Pay>
+                    </Route>
+                    <Route path={`${path}/addreview`}>
+                       <AddReview></AddReview>
+                    </Route>
+                    <Route path={`${path}/addproduct`}>
+                       <AddProduct></AddProduct>
+                    </Route>
+                    <Route path={`${path}/manageorder`}>
+                       <ManageOrder></ManageOrder>
+                    </Route>
+                    <Route path={`${path}/manageproduct`}>
+                       <ManageProduct></ManageProduct>
+                    </Route>
+                </Switch>
             </Box>
         </Box>
     );

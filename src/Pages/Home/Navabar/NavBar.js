@@ -19,7 +19,7 @@ const NavBar = () => {
                         <NavLink className='mx-3 text-white text-decoration-none' to="login">Login</NavLink>}
                 </Nav>
                {user.email && <Navbar.Text>
-                    Signed in as: <p>{user?.displayName}</p>
+                   <p>{user?.displayName}</p>
                 </Navbar.Text>}
             </Container>
         </Navbar>

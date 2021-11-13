@@ -4,14 +4,14 @@ import { Card, Col, Row } from 'react-bootstrap';
 const ManageProduct = () => {
     const [product, setProduct] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:4500/addproduct`)
+        fetch(`https://immense-crag-91398.herokuapp.com/addproduct`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data)
             })
     }, [])
     const handleDelete = id => {
-        const url = `http://localhost:4500/addproduct/${id}`
+        const url = `https://immense-crag-91398.herokuapp.com/addproduct/${id}`
         console.log(url);
         const procced = window.confirm('are you sure??')
         if (procced) {

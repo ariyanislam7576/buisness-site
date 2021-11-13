@@ -11,9 +11,9 @@ const Product = ({product}) => {
                     <Card.Img variant="top" src={img} />
                     <Card.Body className='text-start'>
                         <Card.Title>{name}</Card.Title>
-                        <strong><p> ${price}</p></strong>
+                        <strong><p> Price: ${price}</p></strong>
                         <Card.Text>
-                           {description}
+                           {description.slice(0,100)}
                         </Card.Text>
                         <NavLink to={`/placeorder/${_id}`}>
                         <button className='btn-info rounded px-2 fw-800'>Bay now</button>

@@ -7,7 +7,7 @@ const MyOrder = () => {
 
     const [order, setOrder] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:4500/myorder?email=${user.email}`)
+        fetch(`https://immense-crag-91398.herokuapp.com/myorder?email=${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setOrder(data)
@@ -15,7 +15,7 @@ const MyOrder = () => {
     }, [])
 
     const handleDelete = id => {
-        const url = `http://localhost:4500/myorder/${id}`
+        const url = `https://immense-crag-91398.herokuapp.com/myorder/${id}`
         const procced = window.confirm('are you sure??')
         if (procced) {
             fetch(url, {
