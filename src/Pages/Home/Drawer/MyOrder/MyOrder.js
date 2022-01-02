@@ -42,7 +42,7 @@ const MyOrder = () => {
                 {
                     order.map(booking => <li className='d-flex justify-content-between border-1 border border-secondary m-3 w-25' key={booking._id}>
 
-                        {booking.place}
+                        {booking.product}
                         {booking ?
                             <button className='btn-info' onClick={() => handleDelete(booking._id)}>delete</button>
                             : <p></p>}
