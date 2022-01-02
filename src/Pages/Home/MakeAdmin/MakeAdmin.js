@@ -23,6 +23,7 @@ const MakeAdmin = () => {
                     console.log(data);
                     setSuccess(true);
                     alert('Admin added')
+                    success()
                     
                 }
             })
@@ -32,13 +33,13 @@ const MakeAdmin = () => {
 
     return (
         <div>
-        <h2>Make an Admin</h2>
+        <h2>Make an Shopkeeper</h2>
         <form onSubmit={handleAdminSubmit}>
            <input 
             type='email'
             placeholder='Enter email'
              onBlur={handleOnBlur}></input>
-           <button type='submit'>Make Admin</button>
+           <button type='submit'>Make Shopkeeper</button>
         </form>
     </div>
     );

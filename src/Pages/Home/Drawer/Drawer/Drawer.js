@@ -14,7 +14,6 @@ import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import {
-    BrowserRouter,
     Switch,
     Route,
     useRouteMatch
@@ -56,7 +55,7 @@ function ResponsiveDrawer(props) {
                         <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/addproduct`}>Add poduct</NavLink> <br />
                     <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/manageorder`}>Manage order</NavLink> <br />
                     <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/manageproduct`}>Manage product</NavLink> <br />
-                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/makeadmin`}>Make admin</NavLink>
+                    <NavLink className='m-3 text-dark text-decoration-none' to={`${url}/makeadmin`}>Make Shopkeeper</NavLink>
                     </div> }<br />
                     <Divider />
                     <button onClick={logOut} className='btn-info m-3 rounded'>logout</button>

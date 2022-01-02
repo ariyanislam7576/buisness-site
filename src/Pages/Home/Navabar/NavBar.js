@@ -15,14 +15,13 @@ const NavBar = () => {
                 <Nav className="me-auto d-flex flex-row">
                     <NavLink className='mx-2 text-white text-decoration-none' to="/home">Home</NavLink>
                     <NavLink className='mx-2 text-white text-decoration-none' to="/dashboard">Dashboard</NavLink>
-                    {user.email ?
-                        <Button onClick={logOut} className='btn-primary border-0'>Logout</Button>
-                        :
-                        <NavLink className='mx-2 text-white text-decoration-none' to="login">Login</NavLink>}
                 </Nav>
-               {user.email && <Navbar.Text>
-                   <p>{user?.displayName}</p>
-                </Navbar.Text>}
+                
+                {user.email &&
+                    <Button onClick={logOut} className='m-2'>Logout</Button>}
+                    {user.email && <Navbar.Text>
+               <img style={{width: "40px", borderRadius: "50%"}} src={user?.photoURL} alt="" />
+            </Navbar.Text>}
             </Container>
         </Navbar>
            </div>

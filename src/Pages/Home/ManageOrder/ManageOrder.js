@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Card, Col, Row } from 'react-bootstrap';
+import useAuth from '../../Hooks/useAuth';
 
 const ManageOrder = () => {
 
     const [order, setOrder] = useState([])
+    const {user} = useAuth()
     useEffect(() => {
         fetch(`https://immense-crag-91398.herokuapp.com/myorder`)
             .then(res => res.json())
@@ -36,14 +39,27 @@ const ManageOrder = () => {
     return (
         <div>
             <ul>
-                {
-                    order.map(booking => <li className='d-flex justify-content-between border-1 border border-secondary m-3 w-50' key={booking._id}>
-
-                        {booking?.product}
-                        {booking ?
-                            <button className='btn-info' onClick={() => handleDelete(booking._id)}>delete</button>
-                            : <p></p>}
-                    </li>)
+            {
+                    order.map(booking =>
+                        <Row key={booking._id} xs={1} md={2} className="g-4">
+                                <Col>
+                                    <Card className='text-start'>
+                                        <Card.Body>
+                                            <Card.Title> {booking.product} </Card.Title>
+                                            <h5>Product Quantity: {booking?.quantity}</h5>
+                                            <Card.Text>
+                                                Product id: {booking?._id}
+                                            </Card.Text>
+                                            <h6>Customar id: {user.providerData[0].uid}</h6>
+                                            <p>Total price : {booking?.price * booking?.quantity}</p>
+                                        </Card.Body>
+                                        {booking ?
+                                 <button className='btn-info' onClick={() => handleDelete(booking._id)}>delete</button>
+                                         : <p></p>}
+                                    </Card>
+                                </Col>
+                        </Row>
+                    )
                 }
             </ul>
         </div>

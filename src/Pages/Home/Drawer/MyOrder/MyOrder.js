@@ -12,7 +12,7 @@ const MyOrder = () => {
             .then(data => {
                 setOrder(data)
             })
-    }, [])
+    }, [user.email])
 
     const handleDelete = id => {
         const url = `https://immense-crag-91398.herokuapp.com/myorder/${id}`

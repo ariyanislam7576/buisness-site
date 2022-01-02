@@ -17,7 +17,7 @@ const PlaceOrder = () => {
             .then(data => {
                 setProduct(data)
             })
-    }, [])
+    }, [id])
     const onSubmit = data => {
         axios.post('https://immense-crag-91398.herokuapp.com/myorder',data)
          .then(res => {
@@ -53,6 +53,7 @@ const PlaceOrder = () => {
                  <br /> <br />
                 <input type="number" {...register("phone")} placeholder='Phone' /> 
                 <br /> <br />
+                <input type="number" {...register("quantity", { required: false, maxLength: 9 })} placeholder='Quantity' /> <br /> <br />
                 <textarea {...register("description", { required: false, maxLength: 2000 })} placeholder='description' /> <br /> <br />
                 <input type="submit" value="procced to booking" />
             </form>
